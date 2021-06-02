@@ -1,0 +1,14 @@
+#dvActions{
+    display: flex;
+    justify-content: space-around;
+    width: 25%;
+}
+
+.container {
+	margin: 10px;
+	border: 1px solid gray;
+	width: 25%;
+	padding: 13px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 4px gray;
+}

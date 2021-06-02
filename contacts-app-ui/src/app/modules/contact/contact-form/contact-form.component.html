@@ -1,0 +1,21 @@
+<h1>{{header}}</h1>
+<hr/>
+<form [formGroup]='contactForm' (ngSubmit)="ngOnSubmit()" id="frmContact">
+    <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" placeholder="Introduzca un nombre" formControlName="name" class="form-control">
+    </div>
+    <div>
+        <label>Email</label>
+        <input type="email" name="" id="" placeholder="Introduzca un correo" formControlName="email">
+    </div>
+    <div>
+        <label for="">Número de teléfono</label>
+        <input type="text" formControlName="phone_number" placeholder="Número de teléfono">
+    </div>
+    <div>
+        <label for="">Número de celular</label>
+        <input type="text" formControlName="cellphone_number" placeholder="Número de celular">
+    </div>
+    <input type="submit" value="Guardar">
+</form>

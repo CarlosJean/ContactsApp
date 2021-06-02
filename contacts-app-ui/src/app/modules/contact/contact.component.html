@@ -1,0 +1,10 @@
+<div class="container">
+    <h1>Contactos</h1>
+    <hr>
+    <a [routerLink]="['/contact/create']">Agregar contacto</a>
+    <div id="contactsList">
+        <ul>            
+            <li *ngFor="let contact of contacts"><a [routerLink]="['./details',contact.id]">{{contact.name}}</a></li>
+        </ul>
+    </div>
+</div>

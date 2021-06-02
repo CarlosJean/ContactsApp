@@ -1,0 +1,11 @@
+<div id="dvActions">
+    <a [routerLink]="['/contact/update',contact.ID]">Editar datos del contacto</a>
+    <a [routerLink]="" (click)="delete()">Eliminar contacto</a>
+</div>
+<div class="container">
+    <h1>{{contact.Name}}</h1>
+    <p>Correo: <span>{{contact.Email}}</span></p>
+    <ul>
+        <li *ngFor="let contactNumber of contact.ContactContactTypes"><strong>{{contactNumber.ContactType.Name}}:</strong> {{contactNumber.Number}}</li>
+    </ul>
+</div>

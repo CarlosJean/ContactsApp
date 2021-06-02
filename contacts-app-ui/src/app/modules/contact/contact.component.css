@@ -1,0 +1,15 @@
+li {
+	border: 1px solid #dbdbdb;
+	list-style: none;
+}
+li:hover {
+	background: #efefef;
+}
+
+li a {
+	display: block;
+	height: 100%;
+	padding: 10px;
+	text-decoration: none;
+	color: black;
+}
