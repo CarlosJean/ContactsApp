@@ -1,7 +1,11 @@
+using ContactsApp.Abtracts;
+using ContactsApp.Data;
+using ContactsApp.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +17,8 @@ using System.Threading.Tasks;
 
 namespace ContactsApp {
     public class Startup {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
@@ -21,7 +27,18 @@ namespace ContactsApp {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddCors(options => {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder => {
+                                      builder.AllowAnyOrigin()
+                                      .AllowAnyMethod();
+                                      
+                                  });
+            });
             services.AddControllers();
+            services.AddDbContext<ContactsAppDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("ContactsDatabase")));
+            services.AddScoped<IContactRepository, ContactRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +51,7 @@ namespace ContactsApp {
 
             app.UseRouting();
 
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {
