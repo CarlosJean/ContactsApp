@@ -30,15 +30,16 @@ namespace ContactsApp {
             services.AddCors(options => {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                                   builder => {
-                                      builder.AllowAnyOrigin()
+                                      builder.WithOrigins("http://localhost:4200")
+                                      .AllowAnyHeader()
                                       .AllowAnyMethod();
-                                      
                                   });
             });
             services.AddControllers();
             services.AddDbContext<ContactsAppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ContactsDatabase")));
             services.AddScoped<IContactRepository, ContactRepository>();
+            services.AddScoped<IContactTypeRepository, ContactTypeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

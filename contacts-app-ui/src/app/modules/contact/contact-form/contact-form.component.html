@@ -9,13 +9,17 @@
         <label>Email</label>
         <input type="email" name="" id="" placeholder="Introduzca un correo" formControlName="email">
     </div>
-    <div>
-        <label for="">Número de teléfono</label>
-        <input type="text" formControlName="phone_number" placeholder="Número de teléfono">
-    </div>
-    <div>
-        <label for="">Número de celular</label>
-        <input type="text" formControlName="cellphone_number" placeholder="Número de celular">
-    </div>
+    <div formArrayName="contacts">
+        <h3>Añadir contacto</h3> <button (click)="addContacts()" type="button">Añadir contacto</button>      
+        <div *ngFor="let contact of contacts.controls; let i=index">
+          <label [formGroupName]="i">            
+              <input type="text" formControlName="phone_number">
+              <select formControlName="contact_type">
+                  <option *ngFor="let contactType of contactTypes" value="{{contactType.id}}">{{contactType.name}}</option>
+              </select>
+              <button type="button" (click)="removeContact(i)" *ngIf="i > 0">Quitar</button>
+          </label>
+        </div>
+      </div>
     <input type="submit" value="Guardar">
 </form>

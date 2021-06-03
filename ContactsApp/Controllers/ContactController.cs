@@ -29,28 +29,42 @@ namespace ContactsApp.Controllers {
         [HttpGet("{id}")]
         public string Get(int id) {
             return JsonConvert.SerializeObject(this.repository.Contact(id));
-        }
-        
+        }        
 
         // POST api/<ContactController>
         [HttpPost]
         public ActionResult Post([FromBody] ContactDTO contactDTO) {
-            var response = this.repository.Save(contactDTO);
-            return Ok(response);
+            try {
+                var response = this.repository.Save(contactDTO);
+                return Ok(response);
+
+            } catch (Exception) {
+                return BadRequest();
+            }
         }
 
         // PUT api/<ContactController>/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] ContactDTO contactDTO) {
-            var response = this.repository.Update(id,contactDTO);
-            return Ok(response);
+            try {
+                var response = this.repository.Update(id,contactDTO);
+                return Ok(response);
+
+            } catch (Exception) {
+                return BadRequest();
+            }
         }
 
         // DELETE api/<ContactController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id) {            
-            var response = this.repository.Delete(id);
-            return Ok(response);
+        public ActionResult Delete(int id) {
+            try {
+                var response = this.repository.Delete(id);
+                return Ok(response);
+
+            } catch (Exception) {
+                return BadRequest();
+            }
         }
     }
 }

@@ -21,6 +21,7 @@ namespace ContactsApp.Repositories {
             var contact = this.context.Contacts
                 .Include(x=>x.Group)
                 .Include(x=>x.ContactContactTypes)
+                .ThenInclude(x=>x.ContactType)
                 .Where(c => c.ID == contactId)
                 .FirstOrDefault();
 
@@ -52,9 +53,10 @@ namespace ContactsApp.Repositories {
         }
 
         public ContactPosted Save(ContactDTO contactDto) {
+
             try {
 
-                //Save contact
+                
                 var contact = new Contact() {
                     Name = contactDto.name,
                     Email = contactDto.email,
@@ -90,8 +92,7 @@ namespace ContactsApp.Repositories {
         public ContactPosted Update(int contactId, ContactDTO contactDto) {
             try {
                 var contact = this.context.Contacts.Where(c => c.ID == contactId).FirstOrDefault();
-
-                //Validación
+                                
                 if (contact != null) {
                     contact.Name = contactDto.name;
                     contact.Email = contact.Email;

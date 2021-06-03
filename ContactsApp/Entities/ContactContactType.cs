@@ -12,7 +12,7 @@ namespace ContactsApp.Entities {
         public int ContactID { get; set; }
         [JsonIgnore]
         public int ContactTypeID { get; set; }
-        [JsonIgnore]
+        
         public ContactType ContactType { get; set; }
         [JsonIgnore]
         public Contact Contact { get; set; } 
